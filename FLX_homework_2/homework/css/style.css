@@ -1,0 +1,140 @@
+@media print {
+    .tm-sidebar, #about, .heading, .blocks, #ideas, .img-contact-us,  #contact{
+        display: none;
+    }
+    .tm-content-box.flex-2-col .tm-section-title {
+        color: #0000FF;
+    }
+    .padding-medium {
+        padding: 0;
+      }
+    p::first-letter {
+        font-size: 30px;
+        color: #87CEFA;
+    }
+    h2 + p {
+        font-style: italic;
+    }
+    .tm-content-box.flex-2-col {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+    .flex-item img {
+        width: 70%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .tm-main-content {
+        width: 80%;
+        margin: auto;
+    }
+    .tm-team-description-container {
+        max-width: 100%;
+    }
+    .tm-section-description {
+        text-indent: 2em;
+    }
+}
+@media screen {
+    .box-bg h2:hover {
+        background-color: #ADD8E6;
+        color: #FFFFFF;
+        font-weight: bold;
+    }
+    p::first-letter {
+        font-size: 30px;
+        color: #87CEFA;
+    }
+    .tm-content-box, .tm-sidebar, .blocks {
+        box-shadow: 0 0 10px rgba(0,0,0, 1);
+    }
+    .tm-banner {
+        border: 25px solid #D3D3D3;
+        padding: 0;
+    }
+    section {
+        position: relative;
+    }
+    section:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        width: 15rem;
+        height: 7rem;
+        background-color: #ADD8E6;
+        clip-path: polygon(0 0, 0 28%, 100% 0);
+      }
+    .tm-content-box.flex-2-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+    .carousel-inner .tm-section-title {
+        color: #DCDCDC;
+        letter-spacing: 5px;
+    }
+    h2 + p {
+        font-style: italic;
+    }
+    p {
+        text-indent: 2em;
+        line-height: 1.5;
+    }
+    .padding-medium ol a:visited {
+        text-decoration: underline;
+    }
+    .padding-medium ol a:hover {
+        color: #ADD8E6;
+        text-decoration: underline;
+        text-decoration-style: double;
+    }
+    .text:after{
+        content: 'New';
+        color: #FF0000;
+        font-size: 11px;
+        position: relative;
+        bottom: 10px;
+        display: inline-block;
+    }
+    .blocks .boxes.gallery-container .box p {
+        line-height: 1.6em;
+        text-indent: initial;
+        color: #000000;
+    }
+    .blocks .boxes.gallery-container .box p::first-letter {
+        color: #000000;
+    }
+    .box.box-work {
+        padding: 8px;
+    }
+    .blocks .gallery-container .box:nth-child(even) {
+        background-color: #D3D3D3;
+    }
+    .mandatory-field::after {
+        content: "*";
+        color: #FF0000;
+        font-weight: bold;
+    }
+    .submit-btn:hover {
+        background: #41AFD4;
+        color: #FFFFFF;
+        border-color: transparent;
+    }
+    .submit-btn {
+        background: #FFFFFF;
+        color: #41AFD4;
+        border: 1px solid #41AFD4;
+        padding: 15px 50px;
+        border-radius: 0;
+    }
+    .contact-form {
+        text-align: right;
+    }
+    .tm-nav-item:hover {
+        background:#D3D3D3;
+    }
+}
