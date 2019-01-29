@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+}
+.global-wrapper {
+
+    min-width: 900px;
+    overflow: hidden;
+}
+header {
+    position: relative;
+    background: url(../img/sample2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #FFFFFF;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 100px;
+}
+header::after {
+    content: '';
+    position: absolute;
+    z-index: 5;
+    border-right: 100vw solid #000000;
+    border-bottom: 180px solid #E8E8E8;
+    bottom: -180px;
+}
+.header-wrapper {
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+}
+.header-wrapper nav a {
+    display: inline-block;
+    color: #FFFFFF;
+    padding: 15px 35px;
+    text-decoration: none;
+}
+.logo a {
+    display: block;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 4px;
+    padding: 20px;
+    color: #FFFFFF;
+}
+.header-title {
+    z-index: 10;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.header-title-text {
+    padding-top: 200px;
+    padding-bottom: 100px;
+}
+.header-title-text b {
+    font-size: 80px;
+}
+.header-title-text p:first-child {
+    text-transform: uppercase;
+    font-size: 55px;
+    font-weight: 300;
+}
+.header-description {
+    color: #F3F3F3;
+    font-size: 15px;
+}
+.header-navigation-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+.header-navigation-buttons {
+    margin: 100px 0;
+}
+.header-navigation-buttons a {
+    color: #FFFFFF;
+    text-decoration: none;
+    display: inline-block;
+    padding: 9px 60px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #F0F0F0;
+}
+.header-description {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    z-index: 10;
+}
+.header-description p:first-child {
+    text-align: left;
+    position: absolute;
+    width: 35%;
+    color: #000000;
+    bottom: -130px;
+    left: 20px;
+}
+.header-description p:nth-child(2) {
+    text-align: left;
+    position: absolute;
+    width: 55%;
+    bottom: -65px;
+    right: 10px;
+}
+main {
+    background: #E8E8E8;
+}
+.heading {
+    text-align: center;
+    font-size: 19px;
+    padding: 30px 0;
+}
+.post-box {
+    display: flex;
+    align-items: center;
+}
+.post {
+    position: relative;
+    padding: 20px 0 20px 20px;
+    color: #FFFFFF;
+    width: 100%;
+}
+.post img {
+    width: 100%;
+    z-index: -10;
+}
+.like {
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    padding: 7px 20px;
+    border: 1px solid #F0F0F0;
+    background: rgba(0, 0, 0, 0.9);
+}
+.date {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    }
+.post-content {
+    width: 100%;
+    padding: 10px;
+}
+.post-content p {
+    text-align: center;
+    padding: 50px 0;
+}
+.explore-boxes-contaier {
+    display: flex;
+    justify-content: space-around;
+    background: #ffffff;
+    padding: 50px 0;
+
+}
+.explore-box {
+    padding: 10px;
+    width: 25%;
+    max-width: 350px;
+    box-shadow: 0 0 3px #000000;
+}
+.explore-box button {
+    cursor: pointer;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    background: #097774;
+    border: inherit;
+    }
+.subscribe-container p {
+    padding: 10px;
+}
+.subscribe-box {
+    padding: 20px 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.subscribe-box p {
+    font-size: 21px;
+    padding-right: 20px;
+}
+form input[type='email'] {
+    padding: 10px;
+    border: 1px solid #000000;
+    background: #E8E8E8;
+}
+form input[type='submit'] {
+    cursor: pointer;
+    padding: 11px;
+    color: #FFFFFF;
+    background: #097774;
+    font-weight: bold;
+    border: inherit;
+}
+footer {
+    padding: 100px 10px 10px 10px;
+}
+.footer-container-1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
+}
+.footer-boxes-container {
+    display: flex;
+    justify-content: space-between;
+}
+.footer-box {
+    padding: 10px;
+    width: 30%;
+}
+.footer-box p, .newsletter,
+.footer-container-2 p {
+    color: #9E9E9E;
+}
+.newsletter form {
+    padding-top: 5px;
+}
+.footer-container-2 article {
+    display: flex;
+    justify-content: space-between;
+}
+.footer-navigation-menu {
+    padding-top: 10px;
+}
+.footer-navigation-menu ul li {
+    list-style-type: none;
+    display: inline-block;
+}
+.footer-navigation-menu ul li a {
+    color: #000000;
+    text-decoration: none;
+    padding: 5px 10px;
+}
