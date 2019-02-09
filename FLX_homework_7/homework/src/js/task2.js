@@ -1,51 +1,36 @@
-let gameStart = confirm('Do you want to play a game?');
-
-if (gameStart === true) {
-	let attempts = 3;
-	let multRange = 5;
-	let iteartor = 1;
-	let totalPrize = 0;
-	let possiblePrize = 10;
-	let gameEnd = false;
-	let multiplyPrize = 3;
-	let prize = possiblePrize;
-	let numberRange = Math.floor(Math.random() * (multRange + iteartor));
-	while (attempts !== 0 && gameEnd !== true) {
-		let game = prompt(`Enter a number from 0 to ${multRange}
-Attempts left: ${attempts}
-Total prize: ${totalPrize}
-Possible prize on current attemp: ${prize}`);
-
-		if (+game === numberRange) {
-			totalPrize += prize;
-			let continueGame = confirm('Congratulations! Do you want to continue a game?');
-
-			if (continueGame === true) {
-				multRange = multRange * 2;
-				numberRange = Math.floor(Math.random() * (multRange + iteartor));
-				possiblePrize = possiblePrize * multiplyPrize;
-				prize = possiblePrize;
-				attempts = 3;
-			} else{
-				alert(`Thank you for a game. Your prize is: ${totalPrize}`);
-				gameEnd = true;
+if (confirm(`Do you want to play a game?`)) {
+	let rangeCof = 2;
+	let maxAttempts = 3;
+	let prizeCof = 3;
+	let userNum, prizeForStroke, secretNum, attempt;
+	do {
+		let prizeMax = 10;
+		let prizeTotal = 0;
+		let maxRange = 5;
+		do {
+			secretNum = Math.round(Math.random() * maxRange);
+			attempt = maxAttempts;
+			for (attempt; attempt > 0; attempt--) {
+				prizeForStroke = Math.floor(prizeMax / Math.pow(2, maxAttempts - attempt));
+				userNum = parseInt(prompt(
+					`Enter a number from 0 to ${maxRange}\n` +
+					`Attempts left: ${attempt}\n` +
+					`Total prize: ${prizeTotal}$\n` +
+					`Possible prize on current attempt: ${prizeForStroke}$`
+				));
+				if (userNum === secretNum) {
+					prizeTotal += prizeForStroke;
+					prizeMax *= prizeCof;
+					maxRange *= rangeCof;
+					break;
+				}
 			}
-		} else {
-			attempts--;
-			prize = Math.floor(prize / 2);
-		}
-		if (attempts === 0) {
-			alert(`Thank you for a game. Your prize is: ${totalPrize}`);
-			let playAgain = confirm('Do you want to play again?');
-			if (playAgain === true) {
-				numberRange = Math.floor(Math.random() * (multRange + iteartor));
-				attempts = 3;
-			} else {
-				alert(`Thank you for a game. Your prize is: ${totalPrize}`);
+			if (attempt === 0) {
+				break;
 			}
-		}
-
-	}
+		} while (confirm(`Congratulation! Your prize is: ${prizeTotal}$ Do you want to continue?`));
+		alert(`Thank you for a game. Your prize is: ${prizeTotal}$`);
+	} while (confirm(`Do you want to play a game again?`));
 } else {
-	alert('You did not become a millionaire, but can.');
+	alert(`You did not become a millionaire, but can.`);
 }
