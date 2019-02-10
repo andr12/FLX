@@ -47,7 +47,7 @@ if (logIn) {
 if (passIn) {
     if (login === user || login === admin && hours < 20) {
         alert("Good day, dear " + login + "!");
-    } else (login === user || login === admin && hours > 20) {
+    } else (login === user || login === admin && hours > 20); {
         alert("Good evening, dear " + login + "!");
     }
 }
