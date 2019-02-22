@@ -1,97 +1,172 @@
 let rootNode = document.getElementById('root');
-let footer = document.createElement('footer');
-let main = document.createElement('main');
 
-rootNode.appendChild(footer);
-rootNode.insertBefore(main, footer);
+const field = document.createElement(`div`);
+field.classList.add(`field`);
+rootNode.appendChild(field);
+field.insertAdjacentHTML(`afterBegin`, `<h1>TODO cat list</h1>`);
 
-let plusItem = document.getElementById('plus');
-plusItem.addEventListener('click', addListItem);
+const menu = document.createElement('div');
+menu.classList.add('menu');
+field.appendChild(menu);
 
+const input = document.createElement(`input`);
+menu.appendChild(input);
+input.setAttribute(`type`, `text`);
+input.setAttribute(`placeholder`, `Add new action`);
 
+const btnAdd = document.createElement(`button`);
+menu.appendChild(btnAdd);
+btnAdd.setAttribute(`disabled`, ``);
+btnAdd.classList.add(`btn-add`);
+btnAdd.insertAdjacentHTML(`afterBegin`,
+    `<i class="material-icons">add_box</i>`);
 
-let logoImg = document.createElement('img');
-logoImg.setAttribute('src', 'assets/img/cat.png');
-logoImg.setAttribute('id', 'img');
-logoImg.setAttribute('alt', 'paw');
-footer.appendChild(logoImg);
-let input = document.getElementById('input');
-let maxItem = 10;
+field.insertAdjacentHTML(`beforeEnd`, `<hr color="#000">`);
 
-function addListItem() {
+const list = document.createElement(`ul`);
+field.appendChild(list);
 
-    if(input.value.trim()) {
-        let itemBox = main.appendChild(document.createElement('div'));
-        itemBox.setAttribute('class', 'itemBox');
-        itemBox.setAttribute('draggable', 'true');
-        let taskBox = itemBox.appendChild(document.createElement('div'));
-        taskBox.setAttribute('class', 'taskBox');
-        insertCheckbox(taskBox);
-        insertLabel(taskBox);
-        insertDelImg(itemBox);
-        input.value = '';
-    }
+field.insertAdjacentHTML(`beforeEnd`,
+    `<i class="material-icons pets-icon">pets</i>`);
 
-    if (main.childNodes.length >= maxItem) {
-        let message = document.createElement('p');
-        message.innerHTML = 'Maximum item per list are created';
-        let title = document.querySelector('h1');
-        let header = document.querySelector('header');
-        header.insertBefore(message, title);
-        disable(input);
-        disable(plusItem);
-    }
+const notification = document.createElement(`p`);
+notification.textContent = `Maximum items per list are created`;
+notification.classList.add('notification');
+
+const enterKeyCode = 13;
+
+btnAdd.addEventListener(`click`, addNewTask);
+input.addEventListener(`input`, toggleBtnAdd);
+input.addEventListener(`keyup`, (e) => {
+  if (e.keyCode === enterKeyCode && input.value !== ``) {
+    addNewTask();
+  }
+});
+
+//functions
+function toggleBtnAdd() {
+  if (input.value === `` && !btnAdd.hasAttribute(`disabled`)) {
+    btnAdd.setAttribute(`disabled`, ``);
+  } else if (input.value !== '' && btnAdd.hasAttribute(`disabled`)) {
+    btnAdd.removeAttribute(`disabled`);
+  }
 }
 
+function addNewTask() {
+  const li = document.createElement(`li`);
+  li.setAttribute(`draggable`, `true`);
+  list.appendChild(li);
+  const btnDelete = document.createElement(`button`);
+  btnDelete.classList.add(`btn-delete`);
+  btnDelete.insertAdjacentHTML(`afterBegin`,
+      `<i class="material-icons">delete</i>`);
+  const btnCheckbox = document.createElement(`button`);
+  btnCheckbox.classList.add(`btn-checkbox`);
+  btnCheckbox.insertAdjacentHTML(`afterBegin`,
+      `<i class="material-icons">check_box_outline_blank</i>`);
 
-function insertCheckbox(parentEl) {
-    let button = document.createElement('button');
+  li.appendChild(btnCheckbox);
+  li.insertAdjacentHTML(`beforeEnd`, `<p>${input.value}</p>`);
+  li.appendChild(btnDelete);
 
-    let checkBtn = document.createElement('i');
-    checkBtn.setAttribute('class', 'material-icons');
-    checkBtn.appendChild(document.createTextNode('check_box_outline_blank'));
-    checkBtn.addEventListener('click', checkedItem);
+  getCheckboxes();
+  getDeleteBtns();
+  getLis();
 
-    checkBtn.classList.add('checkBox');
-
-    parentEl.appendChild(button);
-    button.appendChild(checkBtn);
+  input.value = ``;
+  btnAdd.setAttribute(`disabled`, ``);
 }
 
-function insertLabel(parentEl) {
-    let label = document.createElement('span');
-    label.appendChild(document.createTextNode(input.value));
-    parentEl.appendChild(label);
+function getCheckboxes() {
+  const checkboxes = document.querySelectorAll(`.btn-checkbox`);
+  checkboxes.forEach(
+      (checkbox) => checkbox.addEventListener(`click`, handleCheck));
+}
+
+function getDeleteBtns() {
+  const deleteBtns = document.querySelectorAll(`.btn-delete`);
+  deleteBtns.forEach((btn) => btn.addEventListener(`click`, deleteTask));
+}
+
+function handleCheck() {
+  this.firstElementChild.textContent = `check_box`;
+  this.classList.add(`checked`);
+}
+
+function deleteTask() {
+  list.removeChild(this.parentElement);
+  const lis = list.querySelectorAll(`li`);
+  handleItemsMaxNum(lis);
+}
+
+function getLis() {
+  const lis = list.querySelectorAll(`li`);
+  handleItemsMaxNum(lis);
+  lis.forEach((li) => li.addEventListener(`dragstart`, handleDragStart));
+  lis.forEach((li) => li.addEventListener(`drop`, handleDrop));
+  lis.forEach((li) => li.addEventListener(`dragover`, handleDragOver));
+  lis.forEach((li) => li.addEventListener(`dragenter`, handleDragEnter));
+  lis.forEach((li) => li.addEventListener(`dragleave`, handleDragLeave));
+}
+
+function handleItemsMaxNum(lis) {
+  const maxLiNum = 10;
+
+  if (lis.length === maxLiNum && !input.hasAttribute(`disabled`)) {
+    btnAdd.setAttribute(`disabled`, ``);
+    input.setAttribute(`disabled`, ``);
+    field.insertBefore(notification,
+        document.querySelector(`h1`).nextElementSibling);
+
+  } else if (lis.length < maxLiNum && input.hasAttribute(`disabled`)) {
+    btnAdd.removeAttribute(`disabled`);
+    input.removeAttribute(`disabled`);
+    field.removeChild(document.querySelector('.notification'));
+  }
 
 }
 
-function insertDelImg(parentEl) {
-    let del = document.createElement('i');
-    del.setAttribute('class', 'material-icons' );
-    del.classList.add('deleteIcons');
-    del.addEventListener('click', deleteListItem);
-    del.appendChild(document.createTextNode('delete'));
-    parentEl.appendChild(del);
+//drag&drop functions
+function handleDragStart(e) {
+  this.classList.add(`dragged`);
+  e.dataTransfer.setData(`text`, this.className);
+  e.dataTransfer.effectAllowed = `move`;
 }
 
-function deleteListItem() {
-    this.parentNode.remove();
-    if (main.childNodes.length < maxItem) {
-        let message = document.querySelector('p');
-        message.textContent = '';
-        enable(input);
-        enable(plusItem);
-    }
+function handleDragEnter() {
+  this.classList.add(`highlighted`);
 }
 
-function checkedItem () {
-    this.textContent = 'check_box';
+function handleDragLeave() {
+  this.classList.remove(`highlighted`);
 }
 
-function disable(elem) {
-    elem.setAttribute('disabled', 'disabled');
+function handleDragOver(e) {
+  if (e.preventDefault) {
+    e.preventDefault();
+  }
 }
 
-function enable(elem) {
-    elem.removeAttribute('disabled');
+function handleDrop(e) {
+  if (e.preventDefault) {
+    e.preventDefault();
+  }
+
+  if (this.classList.contains(`highlighted`)) {
+    this.classList.remove(`highlighted`);
+  }
+
+  const className = e.dataTransfer.getData(`text`);
+  const droppedLi = document.querySelector(`.${className}`);
+  droppedLi.classList.remove(`dragged`);
+
+  const coords = this.getBoundingClientRect();
+  const halfHeight = 0.5;
+  const elemCenterY = coords.top + halfHeight * this.offsetHeight;
+  const clickY = e.clientY;
+  if (clickY > elemCenterY) {
+    list.insertBefore(droppedLi, this.nextSibling);
+  } else {
+    list.insertBefore(droppedLi, this);
+  }
 }
