@@ -1,0 +1,89 @@
+/* Your styles go here */
+body {
+    font-family: Avenir, sans-serif;
+}
+
+.field {
+    margin: 0 auto;
+    padding: 20px;
+    width: 50%;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 1.6em;
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto 0;
+    padding: 0;
+    width: 50%;
+}
+
+.btn-add {
+    display: flex;
+    margin: 0 auto;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+li a {
+    flex-basis: 70%;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+.btn-checkbox {
+    background: url("../assets/img/todo-s.png") no-repeat;
+    background-size: cover;
+    border: none;
+    padding: 15px;
+}
+
+.checked {
+    background: url("../assets/img/done-s.png") no-repeat;
+    background-size: cover;
+}
+
+.btn-delete {
+    background: url("../assets/img/remove-s.jpg") no-repeat;
+    background-size: cover;
+    border: none;
+    padding: 15px;
+}
+
+input {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.field > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto 0;
+    width: 50%;
+}
+
+.btn-add,
+.btn-cancel,
+.btn-save {
+    background-color: #eae3ea;
+    border-radius: 5px;
+    box-shadow: 1px 1px #aaa5aa;
+}
